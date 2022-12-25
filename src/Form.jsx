@@ -12,18 +12,15 @@ class Form extends React.Component {
             userType: '',
 
         }
+        this.setIntervalId = ''
     }
 
-    removeName = (i) => {
+    componentDidMount = () => {
+       this.setIntervalId = setInterval(() => console.log("this is in form component!"), 1000)
+    }
 
-        const cloneNames = [ ...this.state.name ]
-        cloneNames.splice(i, 1)
-
-        this.setState({
-            name: cloneNames,
-            newState: 10,
-        })
-        
+    componentWillUnmount = () => {
+        clearInterval(this.setIntervalId)
     }
 
     nameChangeHandler = (event) => {
@@ -83,7 +80,7 @@ class Form extends React.Component {
                 <h2> User {type} form </h2>
 
                 <form onSubmit={this.submitHandler} >
-                   { this.props.type === 'signup' && <> Name:-<input type="text" name='name' value={name} onChange={this.nameChangeHandler} /> </> }
+                   { type === 'signup' && <> Name:-<input type="text" name='name' value={name} onChange={this.nameChangeHandler} /> </> }
                     Email:-<input type="email" name='email' value={email} onChange={this.emailChangeHandler}  />
                     Password:-<input type="password" name='password' value={password} onChange={this.passwordChangeHandler} />
                     <br/>

@@ -7,7 +7,16 @@ class AddFood extends Component {
         super(props);
         this.state= {
             name: '',
-            price: 0
+            price: 0,
+            showNotification: false,
+        }
+
+    }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        console.log("App updated!")
+        if( prevState.showNotification !== this.state.showNotification){
+            alert("Food added successfuly")
         }
 
     }
@@ -32,6 +41,10 @@ class AddFood extends Component {
 
         const parsedResponse = await response.json()
         console.log("the parsed response", parsedResponse)
+        if(response.status === 200){
+            this.setState({ showNotification: true })
+        }
+
     }
 
     nameChangeHandler = (event) => {
