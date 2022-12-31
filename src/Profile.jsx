@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AddFood from './AddFood';
+import ListFood from './ListFood';
 
 class Profile extends Component {
     render() {
@@ -9,8 +10,8 @@ class Profile extends Component {
               <div> Name:- {this.props.user.name}  </div>
               <div> Email:- {this.props.user.email}  </div>
 
-                <AddFood/>
-
+                {/* <AddFood/> */}
+                <ListFood/>
             </div>
         );
     }

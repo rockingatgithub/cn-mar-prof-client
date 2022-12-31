@@ -15,13 +15,13 @@ class Form extends React.Component {
         this.setIntervalId = ''
     }
 
-    componentDidMount = () => {
-       this.setIntervalId = setInterval(() => console.log("this is in form component!"), 1000)
-    }
+    // componentDidMount = () => {
+    //    this.setIntervalId = setInterval(() => console.log("this is in form component!"), 1000)
+    // }
 
-    componentWillUnmount = () => {
-        clearInterval(this.setIntervalId)
-    }
+    // componentWillUnmount = () => {
+    //     clearInterval(this.setIntervalId)
+    // }
 
     nameChangeHandler = (event) => {
         this.setState({name: event.target.value})
