@@ -1,5 +1,7 @@
 import Cookies from 'js-cookie';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setCounter } from './actions';
 import Form from './Form';
 import Profile from './Profile';
 
@@ -35,9 +37,15 @@ class App extends Component {
     }
 
   }
+
+  setCounter = (num) => {
+    this.props.dispatch(setCounter(num))
+  }
   
 
   render() {
+
+    console.log("state in store", this.props.main)
 
     const {isLoggedIn, user} = this.state
 
@@ -45,9 +53,20 @@ class App extends Component {
       <>  
          {isLoggedIn ?<Profile user={user} /> : <> <Form type="signup" loginHandler={this.loginHandler} />
          <Form type="signin" loginHandler={this.loginHandler} /> </>}
+         <div>
+           Counter value:- {this.props.main.counter}
+         </div>
+         <button onClick={() => this.setCounter(4)} >
+Set counter
+         </button>
       </>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    main: state
+  }
+}
+export default  connect(mapStateToProps)(App);
