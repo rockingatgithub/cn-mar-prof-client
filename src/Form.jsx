@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux';
+import { userLogin } from './actions';
 
 class Form extends React.Component {
 
@@ -44,25 +46,7 @@ class Form extends React.Component {
             email: email,
             password: password
         }
-
-        let response = await fetch(`http://localhost:8000/${userType}/${type}`, {
-            method: 'POST',
-            body: JSON.stringify(user),
-            headers: {
-                'Content-Type' :'application/json'
-            }
-        })
-
-        let parsedResponse = await response.json()
-        console.log("the response", parsedResponse)
-        const token = parsedResponse.token;
-        
-
-        if(token) {
-            this.props.loginHandler(parsedResponse.data)
-            document.cookie = 'user' + '=' + token
-        }
-
+        this.props.dispatch(userLogin(user, type, userType))
     }
 
     userTypeHandler = (event) => {
@@ -95,4 +79,10 @@ class Form extends React.Component {
 
 }
 
-export default Form
+const mapStateToProps = (state) => {
+    return {
+        main: state
+    }
+}
+
+export default connect(mapStateToProps)(Form)

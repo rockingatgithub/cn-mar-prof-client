@@ -7,12 +7,9 @@ const initialState = {
 function reducers (state = initialState, actions) {
     switch (actions.type) {
         case 'LOGIN':
-            
-            break;
-
+            return { ...state, ...actions.data  };
         case 'INC':
             return { ...state, counter: actions.data };
-    
         default:
             return { ...state };
     }
